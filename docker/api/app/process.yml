@@ -1,0 +1,14 @@
+apps:
+  - script : ./index.js
+    # Reload on file change
+    watch  : true
+    watch_options:
+      usePolling: true,
+      useFsEvents: false,
+      atomic: false
+      persistent    : true,
+      ignoreInitial : true
+    env    :
+      NODE_ENV: development
+    env_production:
+      NODE_ENV: production

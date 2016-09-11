@@ -1,0 +1,16 @@
+{
+  "name": "uurduur",
+  "version": "0.0.1",
+  "description": "Hour tracking",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "test"
+  },
+  "author": "Dion Snoeijen <hallo@dionsnoeijen.nl>",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.4.2",
+    "express": "^4.14.0"
+  }
+}
