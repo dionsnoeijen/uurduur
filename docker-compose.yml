@@ -1,12 +1,40 @@
 version: "2"
 services:
-  api:
+  uurduur_rabbitmq:
+    build: ./docker/rabbitmq
+    container_name: uurduur_rabbitmq
+    ports: [ "15672:15672", "5672:5672" ]
+  uurduur_redis:
+    container_name: uurduur_redis
+    image: redis:latest
+  uurduur_eventstore:
+    container_name: uurduur_eventstore
+    image: eventstore/eventstore:latest
+    ports: [ "2113:2113" ]
+    volumes: [ "./docker/eventstore/var/eventstore:/data/db" ]
+  uurduur_api:
     build: ./docker/api
-    container_name: api
+    container_name: uurduur_api
     restart: always
     ports:
-      - "8080:8080"
+      - "8070:8070"
     volumes:
       - ./docker/api/app:/usr/src/app
-      # Mount the node_modules vulume, otherwise it will be gone after mounting
       - /usr/src/app/node_modules
+    links:
+      - uurduur_rabbitmq
+      - uurduur_redis
+      - uurduur_eventstore
+  uurduur_domainmodel:
+    build: ./docker/domainmodel
+    container_name: uurduur_domainmodel
+    restart: always
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./docker/domainmodel/app:/usr/src/app
+      - /usr/src/app/node_modules
+    links:
+      - uurduur_rabbitmq
+      - uurduur_redis
+      - uurduur_eventstore

@@ -14,6 +14,6 @@ RUN npm install && \
 
 ENV DEBUG=*
 
-EXPOSE 8070
+EXPOSE 8090
 
 CMD ["pm2", "start", "process.yml", "--no-daemon"]

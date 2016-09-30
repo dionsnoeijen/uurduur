@@ -1,7 +1,7 @@
 {
-  "name": "uurduur-api",
+  "name": "uurduur-domainmodel",
   "version": "0.0.1",
-  "description": "Hour tracking",
+  "description": "Hour tracking | Domain Model",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

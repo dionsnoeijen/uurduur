@@ -4,13 +4,13 @@ const express = require('express');
 const ampq = require('amqplib');
 
 // Constants
-const PORT = 8070;
+const PORT = 8090;
 
 // App
 const app = express();
 
 app.get('/', function (req, res) {
-    res.send('Hello world! I am your Api\n');
+    res.send('Hello world! I am your domain model\n');
 });
 
 app.listen(PORT);
