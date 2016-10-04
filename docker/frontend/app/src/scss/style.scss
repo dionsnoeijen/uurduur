@@ -1,0 +1,82 @@
+// Tools and Settings: Global SASS variables, functions and mixins.
+@import 'tools/functions';
+@import 'settings/settings';
+@import 'tools/mixins';
+
+
+// Generic: Very far reaching selectors and font imports. In this case, we set box-sizing and reset browsers defaults.
+@import 'generic/box-sizing';
+@import 'generic/reset';
+@import 'generic/form-reset';
+
+
+// Base: Default styling on classless elements, such as html/body and type elements.
+@import 'base/root';
+@import 'base/type';
+
+
+// Components: The bulk of our code: Defined peices of the site selected with classes and using BEM where appropriate.
+@import 'components/header';
+@import 'components/footer';
+@import 'components/grid';
+@import 'components/nav';
+
+
+// Trumps: Nothing to do with The Donald, though we should probably build a wall around it.
+// Overrides, helpers and utilities; our most specific selectors that should always trump earlier rules.
+@import 'trumps/helpers';
+@import 'trumps/shame';
+
+html {
+  font: 0.75em/1.5 sans-serif;
+  background-color: #f9f9f9;
+  color: #444;
+}
+
+body {
+  max-width: 1200px;
+  margin: 18px auto;
+  padding: 0 18px;
+}
+
+.hero {
+  text-align: center;
+  padding: 54px 0;
+}
+.hero p {
+  font-size: 1.333em;
+  margin: 0;
+}
+
+h1 {
+  font-size: 6em;
+  text-align: center;
+  margin: 0;
+  line-height: 1;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.25);
+}
+@media screen and (max-width: 700px) {
+  h1 {
+    font-size: 3em;
+  }
+}
+
+p {
+  margin: 0;
+  margin-bottom: 18px;
+}
+
+a {
+  color: #f43059;
+  font-weight: bold;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.demo-block {
+  background-color: #f43059;
+  color: #fff;
+  padding: 18px;
+}

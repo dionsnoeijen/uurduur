@@ -1,0 +1,17 @@
+{
+  "deploy": "dist",
+  "source": {
+    "styles"     : "src/scss",
+    "scripts"    : "src/js",
+    "images"     : "src/img",
+    "fonts"      : "src/fonts",
+    "html"       : "src"
+  },
+  "dest": {
+    "styles"     : "dist/css",
+    "scripts"    : "dist/js",
+    "images"     : "dist/img",
+    "fonts"      : "dist/fonts",
+    "html"       : "dist"
+  }
+}

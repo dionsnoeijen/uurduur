@@ -3,14 +3,17 @@ services:
   uurduur_rabbitmq:
     build: ./docker/rabbitmq
     container_name: uurduur_rabbitmq
-    ports: [ "15672:15672", "5672:5672" ]
+    ports:
+      - "15672:15672"
+      - "5672:5672"
   uurduur_redis:
     container_name: uurduur_redis
     image: redis:latest
   uurduur_eventstore:
     container_name: uurduur_eventstore
     image: eventstore/eventstore:latest
-    ports: [ "2113:2113" ]
+    ports:
+      - "2113:2113"
     volumes: [ "./docker/eventstore/var/eventstore:/data/db" ]
   uurduur_api:
     build: ./docker/api
@@ -38,3 +41,12 @@ services:
       - uurduur_rabbitmq
       - uurduur_redis
       - uurduur_eventstore
+  uurduur_frontend:
+    build: ./docker/frontend
+    container_name: uurduur_frontend
+    ports:
+      - "8080:8080"
+      - "35729:35729"
+    volumes:
+      - ./docker/frontend/app:/usr/src/app
+      - /usr/src/app/node_modules
