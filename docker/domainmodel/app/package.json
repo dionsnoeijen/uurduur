@@ -4,13 +4,18 @@
   "description": "Hour tracking | Domain Model",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "test"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node_modules/babel/bin/babel.js src --source-maps --out-dir dist",
+    "start": "node_modules/nodemon/bin/nodemon.js -- node_modules/babel/bin/babel-node.js index.js"
   },
   "author": "Dion Snoeijen <hallo@dionsnoeijen.nl>",
   "license": "ISC",
   "dependencies": {
     "amqplib": "^0.4.2",
     "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "babel": "5.8.29",
+    "nodemon": "1.8.0"
   }
 }

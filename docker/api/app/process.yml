@@ -3,7 +3,7 @@ apps:
     # Reload on file change
     watch  : true
     watch_options:
-      usePolling: true,
+      usePolling: false,
       useFsEvents: false,
       atomic: false
       persistent    : true,

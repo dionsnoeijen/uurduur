@@ -16,4 +16,4 @@ ENV DEBUG=*
 
 EXPOSE 8090
 
-CMD ["pm2", "start", "process.yml", "--no-daemon"]
+CMD ["pm2", "start", "--no-daemon", "npm", "--", "start", "--watch"]

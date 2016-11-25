@@ -10,7 +10,8 @@ const PORT = 8090;
 const app = express();
 
 app.get('/', function (req, res) {
-    res.send('Hello world! I am your domain model\n');
+
+    res.send('Hello world! I am your domain model, you know\n');
 });
 
 app.listen(PORT);
