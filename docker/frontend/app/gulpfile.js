@@ -5,6 +5,7 @@ var gulp       = require('gulp'),
     browserify = require('browserify'),
     source     = require('vinyl-source-stream'),
     buffer     = require('vinyl-buffer'),
+    envify     = require('loose-envify'),
     cache      = require('gulp-cache'),
     imagemin   = require('gulp-imagemin'),
     size       = require('gulp-size'),
@@ -46,6 +47,7 @@ gulp.task('js', function() {
         debug: true
     })
         .transform(babelify, {presets: ["es2015"]})
+        .transform(envify())
         .bundle()
         .on('error', function(e) {
             gutil.log(e);

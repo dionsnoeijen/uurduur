@@ -1,17 +1,15 @@
-'use strict';
-
 import React from 'react';
 import { render } from 'react-dom';
-import App from './element/App';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import uurApp from './reducers/reducers';
+import { createStore } from 'redux';
+import todoApp from './reducers';
+import App from './components/App';
 
-let store = createStore(uurApp);
+let store = createStore(todoApp);
 
 render(
-    <Provider store={ store }>
+    <Provider store={store}>
         <App />
     </Provider>,
-    document.getElementById('example')
+    document.getElementById('root')
 );
