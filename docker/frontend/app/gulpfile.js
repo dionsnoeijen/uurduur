@@ -53,8 +53,9 @@ gulp.task('js', function() {
         .pipe(plumber())
         .pipe(source('app.js'))
         .pipe(buffer())
-        .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(uglify())
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(paths.dest.scripts))
         .pipe(livereload());
 });
@@ -76,7 +77,7 @@ gulp.task('watch', function() {
     livereload.listen();
 
     gulp.watch(paths.source.html + '/*.html', ['html']);
-    gulp.watch(paths.source.scripts + '/*.js', ['scripts']);
+    gulp.watch(paths.source.scripts + '/**/*.js', ['scripts']);
     gulp.watch(paths.source.styles + '/**/*.scss', ['sass']);
 });
 

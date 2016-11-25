@@ -1,19 +1,26 @@
 'use strict';
 
-import React from 'react';
+import React, { PropTypes } from 'react';
+import TableRow from './TableRow';
 
 export default class Table extends React.Component {
 
     render() {
+
+        // console.log('TABLE ITEMS', this.props.items.data);
+
         return (
             <table>
                 <tbody>
-                    <tr>
-                        <td>Col 1</td>
-                        <td>Col 2</td>
-                    </tr>
+                    {this.props.items.map((item, i) =>
+                        <TableRow key={i} text={item.text} />
+                    )}
                 </tbody>
             </table>
         );
     }
 }
+
+// Table.propTypes = {
+//     items: PropTypes.array.required
+// };

@@ -1,44 +1,17 @@
 'use strict';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import TestForm from 'form/TestForm';
-import Table from 'element/Table';
-
+import { render } from 'react-dom';
+import App from './element/App';
 import { createStore } from 'redux';
-import testApp from './reducers/reducers';
+import { Provider } from 'react-redux';
+import uurApp from './reducers/reducers';
 
-let store = createStore(testApp);
+let store = createStore(uurApp);
 
-import { addToTable } from './actions/actions';
-
-console.log(store.getState());
-
-let unsubscribe = store.subscribe(() =>
-    console.log(store.getState())
-);
-
-store.dispatch(addToTable('Some'));
-store.dispatch(addToTable('Real'));
-store.dispatch(addToTable('Table'));
-store.dispatch(addToTable('Data'));
-
-unsubscribe();
-
-class App extends React.Component {
-
-    render() {
-        return (
-            <div>
-                <h1>Test form</h1>
-                <TestForm/>
-                <h1>Data</h1>
-                <Table/>
-            </div>
-        );
-    }
-}
-
-ReactDOM.render(<App />,
+render(
+    <Provider store={ store }>
+        <App />
+    </Provider>,
     document.getElementById('example')
 );

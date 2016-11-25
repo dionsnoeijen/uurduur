@@ -1,13 +1,28 @@
 'use strict';
 
-import React from 'react';
-import { ADD_TO_TABLE } from '../actions/actions';
+import Component from 'react';
+import { addToTable, ADD_TO_TABLE } from '../actions/actions';
+import connect from 'react-redux';
 
-export default class TestForm extends React.Component {
+
+const onFormSubmit = (e) => {
+    e.preventDefault();
+
+    var form = e.target,
+        formData = new FormData(form);
+
+    console.log('DISPATCH', formData);
+
+    return function(dispatch) {
+        dispatch(addToTable(formData));
+    };
+};
+
+class TestForm extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onFormSubmit}>
+            <form onSubmit={onFormSubmit}>
                 <input name="uurduur[name]" type="text" /><br />
                 <input name="uurduur[project]" type="text" /><br />
                 <input name="uurduur[type]" type="text" /><br />
@@ -15,9 +30,8 @@ export default class TestForm extends React.Component {
             </form>
         );
     }
-
-    onFormSubmit(e) {
-        e.preventDefault();
-        console.log(e);
-    }
 }
+
+TestForm = connect(onFormSubmit)(TestForm);
+
+export default TestForm;
