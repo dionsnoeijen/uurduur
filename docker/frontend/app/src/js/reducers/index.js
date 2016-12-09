@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux'
-import todos from './todos'
-import visibilityFilter from './visibilityFilter'
+import containers from './containers'
 
 const todoApp = combineReducers({
-    todos,
-    visibilityFilter
+    containers
 });
 
-export default todoApp;
+export default todoApp

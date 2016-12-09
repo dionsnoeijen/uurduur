@@ -1,1 +1,16 @@
 /* Main site header */
+
+.header {
+
+  @include make-row();
+
+  &_logo {
+    @include make-col(4);
+    color: #ff0000;
+  }
+
+  &_menu {
+    @include make-col(8);
+    color: #ff0000;
+  }
+}

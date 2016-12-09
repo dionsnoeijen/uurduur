@@ -1,13 +1,13 @@
 import React from 'react';
-import Footer from './Footer';
-import AddTodo from '../containers/AddTodo';
-import VisibleTodoList from '../containers/VisibleTodoList';
+import Header from './Header';
+import VisibleContainerList from '../containers/VisibleContainerList';
+import AddContainer from '../containers/AddContainer';
 
 const App = () => (
-    <div>
-        <AddTodo />
-        <VisibleTodoList />
-        <Footer />
+    <div className="container-fluid">
+        <Header />
+        <VisibleContainerList />
+        <AddContainer />
     </div>
 );
 
