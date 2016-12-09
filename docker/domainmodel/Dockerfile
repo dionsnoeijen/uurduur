@@ -10,7 +10,8 @@ COPY ./app /usr/src/app
 
 # Bundle app source
 RUN npm install && \
-    npm install -g pm2
+    npm install -g pm2 && \
+    npm install mocha -g
 
 ENV DEBUG=*
 
