@@ -4,10 +4,8 @@ import { assert } from 'chai'
 
 export default class AddContainer {
 
-    constructor(
-        uuid,
-        name
-    ) {
+    constructor(uuid, name) {
+
         assert.typeOf(uuid, 'string');
         assert.typeOf(name, 'string');
         assert.isAtLeast(name.length, 1);
@@ -18,8 +16,6 @@ export default class AddContainer {
 
     static create(uuid, name) {
 
-        return new AddContainer(
-            uuid, name
-        );
+        return new AddContainer(uuid, name);
     }
 }

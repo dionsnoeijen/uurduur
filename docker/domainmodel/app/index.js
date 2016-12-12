@@ -2,28 +2,55 @@
 
 const app = require('express')();
 import Subscribe from './helpers/Subscribe';
-import EventStore from 'event-store-client';
+import EventStoreClient from 'event-store-client';
+import ContainerCreated from './events/ContainerCreated';
 
 // Constants
 const PORT = 8090;
 
-var config = {
-    'eventStore': {
-        'address': "127.0.0.1",
-        'port': 1113,
-        'stream': '$stats-127.0.0.1:2113',
-        'credentials': {
-            'username': "admin",
-            'password': "changeit"
+const config = {
+    eventStore: {
+        address: "uurduur_eventstore",
+        port: 2113,
+        credentials: {
+            username: "admin",
+            password: "changeit"
         }
     },
-    'debug': false
+    debug: false
 };
+
+const options = {
+    host: config.eventStore.address,
+    port: config.eventStore.port,
+    debug: config.debug,
+    onError: function(e) {
+        console.log('lES CONNECTION DU ERROR');
+    }
+};
+
+var connection = new EventStoreClient.Connection(options);
+connection.sendPing(function() {
+    connection.close();
+    console.log('CONNECTED?!?!?!?!?');
+});
 
 // Container command handler
 Subscribe.to('container', function(msg) {
 
-    console.log(msg.content.toString());
+    const connection = new EventStoreClient.Connection(options);
+    connection.writeEvents(
+        'ContainersAdded',
+        EventStoreClient.ExpectedVersion.Any,
+        false,
+        [ new ContainerCreated(msg.uuid, msg.name) ],
+        config.credentials,
+        function(completed) {
+            console.log('Events written result: ' + EventStoreClient.OperationResult.getName(completed.result));
+            connection.close();
+        }
+    );
+
 });
 
 app.get('/', function (req, res) {

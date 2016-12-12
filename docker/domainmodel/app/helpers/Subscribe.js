@@ -10,16 +10,7 @@ export default class Subscribe {
         }).then(function (ch) {
             return ch.assertQueue(q).then(function (ok) {
                 return ch.consume(q, function (msg) {
-                    // return new Promise(function (fulfill, reject){
-                    //     if (msg === null) {
-                    //         reject(new Error('No message mate'));
-                    //     } else {
-                    //         fulfill(msg);
-                    //     }
-                    //     ch.ack(msg);
-                    // });
-
-                    c(msg);
+                    c(JSON.parse(msg.content.toString()));
                     ch.ack(msg);
                 });
             });
