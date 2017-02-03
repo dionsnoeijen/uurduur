@@ -14,7 +14,7 @@ export const addContainer = (name) => {
     assert.isString(name, 'name must be a string');
     assert(name.length >= 1, 'name may not be an empty string');
 
-    ajaxPost('http://localhost:8070/post', {
+    ajaxPost('http://localhost:8070/container/add', {
         name: name
     })
         .then((data) => {
