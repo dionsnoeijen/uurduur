@@ -13,8 +13,8 @@ app.use(function(req, res, next) {
 });
 
 // Setup for Controllers
-import ContainerController from './controllers/ContainerController';
 import IndexController from './controllers/IndexController';
+import ContainerController from './controllers/ContainerController';
 
 new IndexController(app);
 new ContainerController(app);
