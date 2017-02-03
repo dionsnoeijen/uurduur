@@ -9,11 +9,11 @@
 const express = require('express');
 const open = require('amqplib').connect('amqp://uurduur_rabbitmq');
 
-import formidable from 'formidable'
-import util from 'util'
-import uuid from 'uuid'
+import formidable from 'formidable';
+import util from 'util';
+import uuid from 'uuid';
 
-import AddContainer from './commands/AddContainer'
+import AddContainer from './commands/AddContainer';
 
 // Constants
 const PORT = 8070;
@@ -29,14 +29,13 @@ app.use(function(req, res, next) {
 
 app.post('/post', function (req, res) {
 
-    var form = new formidable.IncomingForm();
+    let form = new formidable.IncomingForm();
     form.parse(req, function(err, fields, files) {
-        res.writeHead(200, {'content-type': 'application/json'});
 
+        res.writeHead(200, {'content-type': 'application/json'});
         if (err === null) {
 
             const addContainer = AddContainer.create(uuid.v4(), fields.name);
-
             const q = 'container';
 
             open.then(function(conn) {

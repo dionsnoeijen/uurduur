@@ -7,9 +7,11 @@ export default class Repository
 
     }
 
-    recordThat() {
+    recordThat(event) {
 
         // Add some event
+        console.log('EVENT');
+        console.log(event);
     }
 
     persist() {
