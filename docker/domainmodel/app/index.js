@@ -12,7 +12,7 @@ const es = new EventStore();
 // Container command handler
 Subscribe.to('container', function(msg) {
 
-    es.write('containers', [new ContainerCreated(msg.uuid, msg.name)]);
+    es.write('containers', [ContainerCreated.create(msg.uuid, msg.name)]);
 
 });
 

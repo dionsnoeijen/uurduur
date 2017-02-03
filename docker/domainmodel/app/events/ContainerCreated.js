@@ -1,12 +1,15 @@
 'use strict';
 
+import uuid from 'uuid';
+
 export default class ContainerCreated {
 
-    constructor(uuid, name) {
+    constructor(id, name) {
 
-        this.eventId = uuid;
+        this.eventId = uuid.v4();
         this.eventType = this.constructor.name;
         this.data = {
+            containerId: id,
             name: name
         };
     }

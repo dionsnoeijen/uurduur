@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "amqplib": "^0.4.2",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "babel": "5.8.29",

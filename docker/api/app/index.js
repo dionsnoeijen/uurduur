@@ -56,20 +56,6 @@ app.post('/post', function (req, res) {
 
 app.get('/', function (req, res) {
 
-    // new MainController();
-    //
-    // new TestController();
-    //
-    // var q = 'test_queue';
-    //
-    // open.then(function(conn) {
-    //     return conn.createChannel();
-    // }).then(function(ch) {
-    //     return ch.assertQueue(q).then(function(ok) {
-    //         return ch.sendToQueue(q, new Buffer('something to do'));
-    //     });
-    // }).catch(console.warn);
-
     res.send('Hello world! I am your Api\n');
 });
 
