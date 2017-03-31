@@ -9,7 +9,6 @@ import Queue from '../helpers/Queue';
 export default class ContainerController {
 
     constructor(app) {
-
         app.post('/container/add', this.containerAddAction);
     }
 
