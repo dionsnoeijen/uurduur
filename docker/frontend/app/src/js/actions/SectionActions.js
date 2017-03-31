@@ -2,45 +2,30 @@ import { assert } from 'chai'
 import uuid from 'uuid'
 import { ajaxPost, ajaxGet } from '../helpers/Ajax'
 
-export const REQUEST_SECTION_FORM = 'REQUEST_SECTION_FORM';
-export const RECEIVE_SECTION_FORM = 'RECEIVE_SECTION_FORM';
+export const REQUEST_SECTION_HTML_FORM = 'REQUEST_SECTION_FORM';
+export const RECEIVE_SECTION_HTML_FORM = 'RECEIVE_SECTION_FORM';
+export const REQUEST_SECTION_FORM_FIELDS = 'REQUEST_SECTION_FORM_FIELDS';
+export const RECEIVE_SECTION_FORM_FIELDS = 'RECEIVE_SECTION_FORM_FIELDS';
 export const SUCCESS = 'success';
 export const ERROR = 'error';
 
-// const shape = {
-//     activeSection: 'questionnaire',
-//     sections: {
-//         questionnaire: {
-//             form: {
-//                 isFetching: true,
-//                 html: ''
-//             },
-//             entries: [
-//
-//             ]
-//         },
-//         news: {
-//             form: {
-//                 isFetching: true,
-//                 html: ''
-//             },
-//             entries: [
-//
-//             ]
-//         }
-//     }
-// };
-
-const requestSectionForm = (section) => {
+const requestSectionHtmlForm = (section) => {
     return {
-        type: REQUEST_SECTION_FORM,
+        type: REQUEST_SECTION_HTML_FORM,
         section
     }
 };
 
-const receiveSectionForm = (section, json) => {
+const requestSectionFormFields = (section) => {
     return {
-        type: RECEIVE_SECTION_FORM,
+        type: REQUEST_SECTION_FORM_FIELDS,
+        section
+    }
+};
+
+const receiveSectionHtmlForm = (section, json) => {
+    return {
+        type: RECEIVE_SECTION_HTML_FORM,
         section,
         isFetching: false,
         form: json.form,
@@ -48,9 +33,19 @@ const receiveSectionForm = (section, json) => {
     }
 };
 
-const errorReceiveSectionForm = (section, error) => {
+const receiveSectionFromFields = (section, json) => {
     return {
-        type: RECEIVE_SECTION_FORM,
+        type: RECEIVE_SECTION_FORM_FIELDS,
+        section,
+        isFetching: false,
+        fields: json.fields,
+        receivedAt: Date.now()
+    }
+};
+
+const errorReceiveSectionHtmlForm = (section, error) => {
+    return {
+        type: RECEIVE_SECTION_HTML_FORM,
         section,
         isFetching: false,
         error: error,
@@ -58,19 +53,36 @@ const errorReceiveSectionForm = (section, error) => {
     }
 };
 
-export const fetchSectionForm = (section) => {
+const errorReceiveSectionFormFields = (section, error) => {
+    return {
+        type: RECEIVE_SECTION_FORM_FIELDS,
+        section,
+        isFetching: false,
+        error: error,
+        receivedAt: Date.now()
+    }
+};
 
+export const fetchSectionHtmlForm = (section) => {
     return (dispatch) => {
-
-        dispatch(requestSectionForm(section));
-
+        dispatch(requestSectionHtmlForm(section));
         return ajaxGet('http://localhost:8070/' + section + '/form')
             .then((data) => {
-                console.log('THE DATA', data);
-                dispatch(receiveSectionForm(section, JSON.parse(data)));
+                dispatch(receiveSectionHtmlForm(section, JSON.parse(data)));
             }).catch((error) => {
-                console.log('ERROR', error);
-                dispatch(errorReceiveSectionForm(section, error));
+                dispatch(errorReceiveSectionHtmlForm(section, error));
+            });
+    }
+};
+
+export const fetchSectionFormFields = (section) => {
+    return (dispatch) => {
+        dispatch(requestSectionFormFields(section));
+        return ajaxGet('http://localhost:8070/' + section + '/formfields')
+            .then((data) => {
+                dispatch(receiveSectionFromFields(section, JSON.parse(data)));
+            }).catch((error) => {
+                dispatch(errorReceiveSectionFormFields(section, error));
             });
     }
 };

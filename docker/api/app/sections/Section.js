@@ -12,7 +12,9 @@ export default class Section {
         this.name = name;
         this.fields = {};
         this.saveAction = '/' + this.name + '/save';
-        app.get('/' + this.name + '/form', this.getForm.bind(this));
+
+        app.get('/' + this.name + '/form', this.getHtmlForm.bind(this));
+        app.get('/' + this.name + '/formfields', this.getFormFields.bind(this));
         app.post(this.saveAction, this.save.bind(this));
     }
 
@@ -44,7 +46,16 @@ export default class Section {
         return this.fields;
     }
 
-    getForm(req, res) {
+    getFormFields(req, res) {
+        res.writeHead(200, {'content-type': 'application/json'});
+        return res.end(
+            JSON.stringify({
+                fields: this.fields
+            })
+        );
+    }
+
+    getHtmlForm(req, res) {
         res.writeHead(200, {'content-type': 'application/json'});
         let template = fs.readFileSync(__dirname + '/../fieldtypes/FieldType/template/form.html', 'utf8');
         let fields = '';

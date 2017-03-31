@@ -1,8 +1,9 @@
 'use strict';
 
-import fs from 'fs'
+import fs from 'fs';
+import FieldType from '../FieldType/FieldType';
 
-export default class TextInput {
+export default class TextInput extends FieldType {
 
     constructor({
        name = '',
@@ -10,9 +11,7 @@ export default class TextInput {
        label = '',
        placeholder = ''
     } = {}) {
-        this.name = name;
-        this.value = value;
-        this.label = label;
+        super(name, value, label);
         this.placeholder = placeholder;
     }
 
@@ -22,22 +21,6 @@ export default class TextInput {
             .replace(/{{ value }}/g, this.value)
             .replace(/{{ label }}/g, this.label)
             .replace(/{{ placeholder }}/g, this.placeholder);
-    }
-
-    setValue(value) {
-        this.value = value;
-    }
-
-    getValue() {
-        return this.value;
-    }
-
-    getName() {
-        return this.name;
-    }
-
-    getLabel() {
-        return this.label;
     }
 
     getPlaceholder() {

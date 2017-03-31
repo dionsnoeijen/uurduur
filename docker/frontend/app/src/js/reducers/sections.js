@@ -1,18 +1,22 @@
 'use strict';
 
 import { combineReducers } from 'redux';
-import { REQUEST_SECTION_FORM, RECEIVE_SECTION_FORM } from '../actions/SectionActions';
+import {
+    REQUEST_SECTION_HTML_FORM,
+    RECEIVE_SECTION_HTML_FORM,
+    REQUEST_SECTION_FORM_FIELDS,
+    RECEIVE_SECTION_FORM_FIELDS
+} from '../actions/SectionActions';
 
-function form(state = {
-   isFetching: false,
-   form: ''
+function htmlForm(state = {
+   isFetching: false
 }, action) {
     switch (action.type) {
-        case REQUEST_SECTION_FORM:
+        case REQUEST_SECTION_HTML_FORM:
             return Object.assign({}, state, {
                 isFetching: true
             });
-        case RECEIVE_SECTION_FORM:
+        case RECEIVE_SECTION_HTML_FORM:
             return Object.assign({}, state, {
                 isFetching: false,
                 form: action.form,
@@ -23,12 +27,43 @@ function form(state = {
     }
 }
 
-function sectionForm(state = {}, action) {
+function formFields(state = {
+    isFetching: false,
+}, action) {
     switch (action.type) {
-        case RECEIVE_SECTION_FORM:
-        case REQUEST_SECTION_FORM:
+        case REQUEST_SECTION_FORM_FIELDS:
             return Object.assign({}, state, {
-                [action.section]: form(state[action.section], action)
+                isFetching: true
+            });
+        case RECEIVE_SECTION_FORM_FIELDS:
+            return Object.assign({}, state, {
+                isFetching: false,
+                fields: action.fields,
+                lastUpdated: action.receivedAt
+            });
+        default:
+            return state;
+    }
+}
+
+function sectionHtmlForm(state = {}, action) {
+    switch (action.type) {
+        case RECEIVE_SECTION_HTML_FORM:
+        case REQUEST_SECTION_HTML_FORM:
+            return Object.assign({}, state, {
+                [action.section]: htmlForm(state[action.section], action)
+            });
+        default:
+            return state;
+    }
+}
+
+function sectionFormFields(state = {}, action) {
+    switch (action.type) {
+        case RECEIVE_SECTION_FORM_FIELDS:
+        case REQUEST_SECTION_FORM_FIELDS:
+            return Object.assign({}, state, {
+                [action.section]: formFields(state[action.section], action)
             });
         default:
             return state;
@@ -36,7 +71,8 @@ function sectionForm(state = {}, action) {
 }
 
 const sections = combineReducers({
-    forms: sectionForm
+    htmlForms: sectionHtmlForm,
+    formFields: sectionFormFields
 });
 
 export default sections;
