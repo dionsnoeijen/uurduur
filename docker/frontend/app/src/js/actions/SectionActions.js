@@ -6,6 +6,7 @@ export const REQUEST_SECTION_HTML_FORM = 'REQUEST_SECTION_FORM';
 export const RECEIVE_SECTION_HTML_FORM = 'RECEIVE_SECTION_FORM';
 export const REQUEST_SECTION_FORM_FIELDS = 'REQUEST_SECTION_FORM_FIELDS';
 export const RECEIVE_SECTION_FORM_FIELDS = 'RECEIVE_SECTION_FORM_FIELDS';
+export const SAVE_SECTION_FORM_FIELDS = 'SAVE_SECTION_FORM_FIELDS';
 export const SUCCESS = 'success';
 export const ERROR = 'error';
 
@@ -63,6 +64,21 @@ const errorReceiveSectionFormFields = (section, error) => {
     }
 };
 
+const saveSectionFormFields = (section, data) => {
+    return {
+        type: SAVE_SECTION_FORM_FIELDS,
+        data
+    }
+};
+
+const saveSectionFormFieldsError = (section, error) => {
+    return {
+        type: SAVE_SECTION_FORM_FIELDS,
+        error: error,
+        receivedAt: Date.now()
+    }
+};
+
 export const fetchSectionHtmlForm = (section) => {
     return (dispatch) => {
         dispatch(requestSectionHtmlForm(section));
@@ -88,15 +104,13 @@ export const fetchSectionFormFields = (section) => {
 };
 
 
-const saveSection = (section, sectionData) => {
-    ajaxPost('http://localhost:8070/' + section + '/save', sectionData)
-        .then((data) => {
-            return {
-                type: 'SAVE_SECTION',
-                data,
-                uuid: uuid.v4()
-            }
-        }).catch((err) => {
-            console.log('UH OH', err)
-        });
+export const saveSection = (section, formData) => {
+    return (dispatch) => {
+        ajaxPost('http://localhost:8070/' + section + '/save', formData)
+            .then((data) => {
+                dispatch(saveSectionFormFields(section, JSON.parse(data)));
+            }).catch((error) => {
+                dispatch(saveSectionFormFieldsError(section, error));
+            });
+    }
 };

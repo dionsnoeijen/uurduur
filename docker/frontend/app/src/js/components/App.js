@@ -9,9 +9,9 @@ import AddSection from '../containers/AddSection';
 const App = () => (
     <div className="container-fluid">
         <Header />
-        <VisibleContainerList />
-        <AddContainer />
-        <AddSection section="questionnaire"/>
+        {/*<VisibleContainerList />*/}
+        {/*<AddContainer />*/}
+        <AddSection section="questionnaire" />
     </div>
 );
 

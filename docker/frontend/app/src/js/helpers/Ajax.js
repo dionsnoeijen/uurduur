@@ -16,9 +16,14 @@ export const ajaxPost = (url, data) => {
     return new Promise((resolve, reject) => {
         const req = new XMLHttpRequest();
         req.open('POST', url);
-        var formData = new FormData();
-        for (var key in data) {
-            formData.append(key, data[key]);
+        let formData = data;
+        if (!(formData instanceof FormData)) {
+            formData = new FormData();
+            for (let key in data) {
+                if (data.hasOwnProperty(key)) {
+                    formData.append(key, data[key]);
+                }
+            }
         }
         req.onload = () =>
             req.status === 200 ?

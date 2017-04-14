@@ -5,7 +5,8 @@ import {
     REQUEST_SECTION_HTML_FORM,
     RECEIVE_SECTION_HTML_FORM,
     REQUEST_SECTION_FORM_FIELDS,
-    RECEIVE_SECTION_FORM_FIELDS
+    RECEIVE_SECTION_FORM_FIELDS,
+    SAVE_SECTION_FORM_FIELDS
 } from '../actions/SectionActions';
 
 function htmlForm(state = {
@@ -40,6 +41,31 @@ function formFields(state = {
                 isFetching: false,
                 fields: action.fields,
                 lastUpdated: action.receivedAt
+            });
+        default:
+            return state;
+    }
+}
+
+function data(state = {}, action) {
+
+    console.log('ACTION', action);
+
+    switch (action.type) {
+        case SAVE_SECTION_FORM_FIELDS:
+            return Object.assign({}, state, {
+                ... action.fields
+            });
+        default:
+            return state;
+    }
+}
+
+function sectionData(state = {}, action) {
+    switch (action.type) {
+        case SAVE_SECTION_FORM_FIELDS:
+            return Object.assign({}, state, {
+                [action.section]: data(state[action.section], action)
             });
         default:
             return state;

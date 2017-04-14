@@ -8,8 +8,6 @@ import { createStore, applyMiddleware } from 'redux';
 import todoApp from './reducers';
 import App from './components/App';
 
-import { saveSection, fetchSectionHtmlForm, fetchSectionFormFields } from './actions/SectionActions';
-
 let store = createStore(
     todoApp,
     applyMiddleware(
@@ -22,12 +20,4 @@ render(
         <App />
     </Provider>,
     document.getElementById('root')
-);
-
-store.dispatch(fetchSectionHtmlForm('questionnaire')).then(() =>
-    console.log('STATE HTML FORM', store.getState())
-);
-
-store.dispatch(fetchSectionFormFields('questionnaire')).then(() =>
-    console.log('STATE FORM FIELDS', store.getState())
 );
