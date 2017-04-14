@@ -17,6 +17,12 @@ export default class QuestionnaireSection extends Section {
             label: 'Your first name?',
             placeholder: 'First name'
         });
+        this.fields.infix = TextInput.create({
+            name: 'infix',
+            value: '',
+            label: 'Does thou has infix?',
+            placeholder: 'Infix'
+        });
         this.fields.lastName = TextInput.create({
             name: 'lastName',
             value: '',

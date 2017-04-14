@@ -2,7 +2,7 @@
 
 let Preloader = () => {
     return (
-        <div>Some preloader</div>
+        <div class="loader"></div>
     );
 };
 
