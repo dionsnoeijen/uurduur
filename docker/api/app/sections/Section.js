@@ -11,20 +11,34 @@ export default class Section {
     constructor({app, name} = {}) {
         this.name = name;
         this.fields = {};
+        this.entriesAction = '/' + this.name;
         this.saveAction = '/' + this.name + '/save';
 
         app.get('/' + this.name + '/form', this.getHtmlForm.bind(this));
         app.get('/' + this.name + '/formfields', this.getFormFields.bind(this));
+        app.get(this.entriesAction, this.getEntries.bind(this));
         app.post(this.saveAction, this.save.bind(this));
+    }
+
+    mapFormDataToFields(fields) {
+        for (let field in fields) {
+            if (
+                fields.hasOwnProperty(field) &&
+                this.fields.hasOwnProperty(field)
+            ) {
+                this.fields[field].setValue(fields[field]);
+            }
+        }
     }
 
     save(req, res) {
         let form = new formidable.IncomingForm();
         form.parse(req, (err, fields, files) => {
+            this.mapFormDataToFields(fields);
             res.writeHead(200, {'content-type': 'application/json'});
             if (err === null) {
                 const command = SaveSection.create(this);
-                Queue.now(this.getName(), command);
+                Queue.now('section', command);
                 return res.end(util.inspect({
                     fields: fields,
                     files: files,
@@ -48,6 +62,13 @@ export default class Section {
 
     getFormFields(req, res) {
         res.writeHead(200, {'content-type': 'application/json'});
+
+        for (let key in this.fields) {
+            if (this.fields.hasOwnProperty(key)) {
+                this.fields[key].type = this.fields[key].constructor.name;
+            }
+        }
+
         return res.end(
             JSON.stringify({
                 fields: this.fields
@@ -74,5 +95,9 @@ export default class Section {
                 form: template
             })
         );
+    }
+
+    getEntries(req, res) {
+
     }
 }

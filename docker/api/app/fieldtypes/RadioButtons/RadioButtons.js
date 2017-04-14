@@ -8,9 +8,11 @@ export default class RadioButtons extends FieldType {
     constructor({
         name = '',
         value = '',
-        label = ''
+        label = '',
+        options = []
     } = {}) {
         super(name, value, label);
+        this.options = options;
     }
 
     getTemplate() {
@@ -20,15 +22,14 @@ export default class RadioButtons extends FieldType {
             .replace(/{{ label }}/g, this.label);
     }
 
-    getPlaceholder() {
-        return this.placeholder;
+    getOptions() {
+        return this.options;
     }
 
     static create({
         name = '',
         value = '',
         label = '',
-        placeholder = ''
     } = {}) {
         return new RadioButtons({
             name: name,

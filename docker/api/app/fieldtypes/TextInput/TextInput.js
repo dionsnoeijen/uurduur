@@ -2,6 +2,7 @@
 
 import fs from 'fs';
 import FieldType from '../FieldType/FieldType';
+import TemplateParser from '../../helpers/TemplateParser';
 
 export default class TextInput extends FieldType {
 

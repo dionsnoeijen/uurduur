@@ -1,6 +1,6 @@
 'use strict';
 
-class SaveSection {
+export default class SaveSection {
 
     constructor({name, fields = {}} = {}) {
         this.name = name;
