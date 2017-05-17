@@ -3,6 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import TextInput from '../FieldTypes/TextInput';
+import RadioButtons from '../FieldTypes/RadioButtons';
 import { saveSection } from '../../actions/SectionActions';
 
 class SectionForm extends Component {
@@ -20,6 +21,9 @@ class SectionForm extends Component {
                     case 'TextInput':
                         fields.push(<TextInput key={fieldKey} field={field} />);
                     break;
+                    case 'RadioButtons':
+                        fields.push(<RadioButtons key={fieldKey} field={field} />);
+                    break;
                 }
             }
         }
@@ -28,10 +32,8 @@ class SectionForm extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-
         let form = e.currentTarget;
         let formData = new FormData(form);
-
         this.props.dispatch(saveSection(this.props.section, formData));
     }
 

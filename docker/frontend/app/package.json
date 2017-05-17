@@ -1,5 +1,9 @@
 {
-  "name": "uurduur-front-end",
+  "name": "uurduur-frontend",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dionsnoeijen/uurduur"
+  },
   "version": "1.0.0",
   "description": "Dit is de omschrijving",
   "main": "index.js",

@@ -9,7 +9,7 @@ export default class RadioButtons extends FieldType {
         name = '',
         value = '',
         label = '',
-        options = []
+        options = {}
     } = {}) {
         super(name, value, label);
         this.options = options;
@@ -30,11 +30,13 @@ export default class RadioButtons extends FieldType {
         name = '',
         value = '',
         label = '',
+        options = {}
     } = {}) {
         return new RadioButtons({
             name: name,
             value: value,
-            label: label
+            label: label,
+            options: options
         });
     }
 }

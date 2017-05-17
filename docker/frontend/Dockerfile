@@ -14,6 +14,7 @@ RUN npm install && \
 
 ENV DEBUG=*
 
-EXPOSE 8080
+EXPOSE 8080 35729
 
 CMD ["gulp"]
+

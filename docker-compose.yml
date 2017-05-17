@@ -41,12 +41,12 @@ services:
       - uurduur_rabbitmq
       - uurduur_redis
       - uurduur_eventstore
-  uurduur_frontend:
-    build: ./docker/frontend
-    container_name: uurduur_frontend
-    ports:
-      - "8080:8080"
-      - "35729:35729"
-    volumes:
-      - ./docker/frontend/app:/usr/src/app
-      - /usr/src/app/node_modules
+#  uurduur_frontend:
+#    build: ./docker/frontend
+#    container_name: uurduur_frontend
+#    ports:
+#      - "8080:8080"
+#      - "35729:35729"
+#    volumes:
+#      - ./docker/frontend/app:/usr/src/app
+#      - /usr/src/app/node_modules

@@ -49,13 +49,9 @@ function formFields(state = {
 
 function data(state = {}, action) {
 
-    console.log('ACTION', action);
-
     switch (action.type) {
         case SAVE_SECTION_FORM_FIELDS:
-            return Object.assign({}, state, {
-                ... action.fields
-            });
+            return Object.assign({}, state, action.fields);
         default:
             return state;
     }

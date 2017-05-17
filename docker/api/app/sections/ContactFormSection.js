@@ -4,10 +4,10 @@ import Section from './Section';
 import TextInput from '../fieldtypes/TextInput/TextInput';
 import RadioButtons from '../fieldtypes/RadioButtons/RadioButtons';
 
-export default class QuestionnaireSection extends Section {
+export default class ContactFormSection extends Section {
 
     constructor(app) {
-        super({app:app, name: 'questionnaire'});
+        super({app:app, name: 'ContactForm'});
         this.addFields();
     }
 
@@ -30,6 +30,12 @@ export default class QuestionnaireSection extends Section {
             label: 'Your last name?',
             placeholder: 'Last name'
         });
+        this.fields.bobby = TextInput.create({
+            name: 'bobby',
+            value: '',
+            label: 'Your?',
+            placeholder: 'Bobby'
+        });
         this.fields.gender = RadioButtons.create({
             name: 'gender',
             value: 'none',
@@ -43,9 +49,9 @@ export default class QuestionnaireSection extends Section {
     }
 
     static getInstance(app) {
-        if (QuestionnaireSection.section === undefined) {
-            QuestionnaireSection.section = new QuestionnaireSection(app);
+        if (ContactFormSection.section === undefined) {
+            ContactFormSection.section = new ContactFormSection(app);
         }
-        return QuestionnaireSection.section;
+        return ContactFormSection.section;
     }
 }

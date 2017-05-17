@@ -10,13 +10,10 @@ const PORT = 8090;
 
 const Event = new EventStore();
 
-// Container command handler
-Subscribe.to('container', function(msg) {
-    Event.write('containers', [ContainerCreated.create(msg.uuid, msg.name)]);
-});
-
 Subscribe.to('section', function(data) {
-    Event.write(data.section, [SectionSaved.create(data)]);
+    Event.write(data.name, [
+        SectionSaved.create(data)
+    ]);
 });
 
 app.get('/', function (req, res) {
