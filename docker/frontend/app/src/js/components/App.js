@@ -8,6 +8,8 @@ const App = () => (
     <div className="container-fluid">
         <Header />
         <AddSection section="questionnaire" />
+        <hr />
+        <AddSection section="people" />
     </div>
 );
 

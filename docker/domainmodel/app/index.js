@@ -3,17 +3,30 @@
 const app = require('express')();
 import EventStore from './helpers/EventStore';
 import Subscribe from './helpers/Subscribe';
-import ContainerCreated from './events/ContainerCreated';
 import SectionSaved from './events/SectionSaved';
 
 const PORT = 8090;
 
 const Event = new EventStore();
 
-Subscribe.to('section', function(data) {
-    Event.write(data.name, [
+// Save an event to a stream
+Subscribe.to('section', data => {
+    Event.write('section.data-' + data.name, [
         SectionSaved.create(data)
     ]);
+});
+
+// Create a projection based on a data source
+Subscribe.to('create-projection', data => {
+    Event.createProjection(
+        data.name,
+        data.type,
+        data.checkpoints,
+        data.enabled,
+        data.emit,
+        data.trackemittedstreams,
+        data.projection
+    );
 });
 
 app.get('/', function (req, res) {

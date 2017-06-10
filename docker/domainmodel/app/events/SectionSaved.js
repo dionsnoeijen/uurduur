@@ -6,8 +6,11 @@ export default class SectionSaved {
 
     constructor(data) {
         this.eventId = uuid.v4();
-        this.eventType = this.constructor.name;
-        this.section = data.section;
+        this.eventType =
+            data.name.charAt(0).toUpperCase() +
+            data.name.slice(1) +
+            this.constructor.name;
+        //this.section = 'section.data-' + data.name;
         this.data = data;
     }
 

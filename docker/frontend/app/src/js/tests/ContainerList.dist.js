@@ -1,11 +1,7 @@
 'use strict';
 
-import ReactTestUtils from 'react-addons-test-utils';
 import React from 'react';
-
-import ContainerButton from '../components/ContainerButton';
 import ContainerList from '../components/ContainerList';
-
 import { mount, shallow } from 'enzyme';
 import chai, { expect } from 'chai';
 import chaiEnzyme from 'chai-enzyme'
